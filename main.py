@@ -1,5 +1,6 @@
 from imagenes import *
-from Configuraciones import *
+from configuraciones import *
+from utils import *
 import sys
 import pygame  
 ANCHO_VENTANA = 700
@@ -21,8 +22,9 @@ DELAY_CLIC = 500  # 500 milisegundos de retraso entre clics
 
 #CONFIGURAR IMAGENES
 pygame.init()
-imagen = pygame.image.load("TP-Programacion-Pygame\imagenes\image fondo (2).png")
-imagen = pygame.transform.scale(imagen,(ANCHO_VENTANA,ALTO_VENTANA))
+imagen = cargar_imagen("imagenes/menu.png", ANCHO_VENTANA, ALTO_VENTANA)
+#imagen = pygame.image.load("imagenes/menu.png")
+#imagen = pygame.transform.scale(imagen,(ANCHO_VENTANA,ALTO_VENTANA))
 
 #CREAR UNA FUENTE 
 fuente = pygame.font.SysFont("Arial", 30)
