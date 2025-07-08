@@ -1,7 +1,8 @@
 import pygame
 from utils import *
 from configuraciones import *
-
+from ranking import *
+from imagenes import *
 ANCHO_VENTANA = 700
 ALTO_VENTANA = 600
 NEGRO = (0,0,0,)
@@ -16,13 +17,13 @@ COLOR_CELESTE = (0,0,128)
 COLOR_AZUL = (0,0,255)
 
 
-
-
-
 def game_over(pantalla, puntos):
-    
 
-    pantalla.fill(NEGRO)
+    fondo_gameover_img = pygame.image.load("imagenes/fondo.eternauta.gameover.jpg").convert()
+    fondo_gameover_img = pygame.transform.scale(fondo_gameover_img, (ANCHO_VENTANA, ALTO_VENTANA))
+    
+    pantalla.blit(fondo_gameover_img, (0, 0))
+    
     texto1 = fuente.render("GAME OVER", True, ROJO)
     texto2 = fuente.render("Tu puntaje: " + str(puntos), True, COLOR_CELESTE)
     texto3 = fuente.render("Ingresa tu nombre: ", True, COLOR_CELESTE)
@@ -48,7 +49,8 @@ def game_over(pantalla, puntos):
                     if len(nombre) < 10 and evento.unicode.isprintable():
                         nombre += evento.unicode
 
-        pantalla.fill(NEGRO)
+        pantalla.blit(fondo_gameover_img, (0, 0))
+
         pantalla.blit(texto1, (ANCHO_VENTANA // 2 - 100, 150))
         pantalla.blit(texto2, (ANCHO_VENTANA // 2 - 100, 220))
         pantalla.blit(texto3, (ANCHO_VENTANA // 2 - 150, 290))
@@ -56,11 +58,10 @@ def game_over(pantalla, puntos):
         pantalla.blit(texto_nombre, (ANCHO_VENTANA // 2 - 150 + 200, 290))
         pygame.display.flip()
 
-    #guardar_puntaje(nombre, puntos) funcion para agregar (julian)
-    #mostrar_ranking(pantalla) funciones para agregar (julian)
+    guardar_puntaje(nombre, puntos) 
+    mostrar_ranking(pantalla) 
 
 def iniciar_juego():
-
 
     ANCHO = 700
     ALTO = 600
@@ -70,6 +71,24 @@ def iniciar_juego():
     #sonido_colision = pygame.mixer.Sound("recursos/colision.wav")
 
     personaje = {"x": 325, "y": 500, "vel": 5, "ancho": 50, "alto": 50}
+
+    personaje_img = pygame.image.load("imagenes/personaje.eternauta.png").convert_alpha()
+    personaje_img = pygame.transform.scale(personaje_img, (personaje["ancho"], personaje["alto"]))
+
+    enemigo_img = pygame.image.load("imagenes/enemigo.eternauta.png").convert_alpha()
+    enemigo_img = pygame.transform.scale(enemigo_img, (50, 50))
+
+    enemigo2_img = pygame.image.load("imagenes/enemigo.eternauta2.png").convert_alpha()
+    enemigo2_img = pygame.transform.scale(enemigo_img, (50, 50))
+
+    disparo_img = pygame.image.load("imagenes/disparos.eternauta.png").convert_alpha()
+    disparo_img = pygame.transform.scale(disparo_img, (20, 30))
+
+    fondo_img = pygame.image.load("imagenes/fondo.eternauta.webp").convert()
+    fondo_img = pygame.transform.scale(fondo_img, (ANCHO, ALTO))
+
+   
+    
     disparos = []
     enemigos = []
     contador_spawn = 0
@@ -91,12 +110,18 @@ def iniciar_juego():
         disparos, enemigos, puntaje = detectar_colisiones(disparos, enemigos, puntaje)
         enemigos, vidas = detectar_colision_personaje(enemigos, personaje, vidas)
 
-        pantalla.fill((0, 0, 0))
-        pygame.draw.rect(pantalla, (255, 0, 0), (personaje["x"], personaje["y"], personaje["ancho"], personaje["alto"]))
+        # pantalla.fill((0, 0, 0))
+        pantalla.blit(fondo_img, (0, 0))
+
+        # pygame.draw.rect(pantalla, (255, 0, 0), (personaje["x"], personaje["y"], personaje["ancho"], personaje["alto"]))
+        pantalla.blit(personaje_img, (personaje["x"], personaje["y"]))
+
         for disparo in disparos:
-            pygame.draw.rect(pantalla, (0, 255, 0), (disparo["x"], disparo["y"], disparo["ancho"], disparo["alto"]))
+            # pygame.draw.rect(pantalla, (0, 255, 0), (disparo["x"], disparo["y"], disparo["ancho"], disparo["alto"]))
+            pantalla.blit(disparo_img, (disparo["x"], disparo["y"]))
         for enemigo in enemigos:
-            pygame.draw.rect(pantalla, (0, 0, 255), (enemigo["x"], enemigo["y"], enemigo["ancho"], enemigo["alto"]))
+            # pygame.draw.rect(pantalla, (0, 0, 255), (enemigo["x"], enemigo["y"], enemigo["ancho"], enemigo["alto"]))
+            pantalla.blit(enemigo_img, (enemigo["x"], enemigo["y"]))
         
         mostrar_hud(pantalla, fuente, vidas, puntaje)
         
@@ -108,3 +133,58 @@ def iniciar_juego():
             return #mostrar_menu() Agregar funcion (mateo)
             
         pygame.display.flip()
+
+import os
+import json
+
+ARCHIVO_RANKING = "ranking.json"
+
+def guardar_puntaje(nombre, puntaje):
+    # Si el archivo no existe, lo crea con una lista vacía
+    if not os.path.exists(ARCHIVO_RANKING):
+        with open(ARCHIVO_RANKING, "w") as archivo:
+            json.dump([], archivo)
+
+    ranking = []
+    if os.path.getsize(ARCHIVO_RANKING) > 0:
+        with open(ARCHIVO_RANKING, "r") as archivo:
+            ranking = json.load(archivo)
+
+    ranking.append({"nombre": nombre, "puntaje": puntaje})
+
+    with open(ARCHIVO_RANKING, "w") as archivo:
+        json.dump(ranking, archivo, indent=4)
+ARCHIVO_RANKING = "ranking.json"
+
+def ordenar_ranking():
+    if not os.path.exists(ARCHIVO_RANKING) or os.path.getsize(ARCHIVO_RANKING) == 0:
+        return []
+
+    with open(ARCHIVO_RANKING, "r") as archivo:
+        ranking = json.load(archivo)
+
+    for i in range(len(ranking)):
+        for j in range(0, len(ranking) - i - 1):
+            if ranking[j]["puntaje"] < ranking[j + 1]["puntaje"]:
+                ranking[j], ranking[j + 1] = ranking[j + 1], ranking[j]
+
+    return ranking
+
+def mostrar_ranking(pantalla):
+    fondo_ranking_img = pygame.image.load("imagenes/eternauta8.jpg").convert()
+    fondo_ranking_img = pygame.transform.scale(fondo_ranking_img, (ANCHO_VENTANA, ALTO_VENTANA))
+
+    pantalla.blit(fondo_ranking_img, (0, 0))
+
+    ranking = ordenar_ranking()
+    fuente_chica = pygame.font.SysFont("Courier New", 40)
+
+    i = 0
+    for jugador in ranking[:5]:
+        texto = fuente_chica.render(f"{i+1}. {jugador['nombre']} - {jugador['puntaje']}", True, COLOR_BLANCO)
+        pantalla.blit(texto, (ANCHO_VENTANA // 2 - 150, 100 + i * 40))
+        i += 1
+    pygame.display.flip()
+    pygame.time.wait(5000)  
+
+iniciar_juego()

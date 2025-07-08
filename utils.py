@@ -47,7 +47,7 @@ def mover_personaje(teclas, personaje, ancho_pantalla, alto_pantalla):
         personaje["x"] -= personaje["vel"]
     if teclas[pygame.K_RIGHT] and personaje["x"] + personaje["ancho"] < ancho_pantalla:
         personaje["x"] += personaje["vel"]
-    if teclas[pygame.K_UP] and personaje["y"] > 0:
+    if teclas[pygame.K_UP] and personaje["y"] > 360:
         personaje["y"] -= personaje["vel"]
     if teclas[pygame.K_DOWN] and personaje["y"] + personaje["alto"] < alto_pantalla:
         personaje["y"] += personaje["vel"]
