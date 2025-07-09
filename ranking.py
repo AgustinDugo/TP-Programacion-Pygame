@@ -1,7 +1,12 @@
 #------------------------------------------Ranking JSON-------------------------------------------------------------
+import pygame
 import os
 import json
 
+
+ANCHO_VENTANA = 800 # Ancho de la ventana del juego.
+ALTO_VENTANA = 600 # Alto de la ventana del juego. # Crea una ventana de 800 píxeles de ancho y 600 de alto.
+BLANCO = (255, 255, 255)
 ARCHIVO_RANKING = "ranking.json"
 
 def guardar_puntaje(nombre, puntaje):
@@ -35,17 +40,19 @@ def ordenar_ranking():
 
     return ranking
 
-# def mostrar_ranking(pantalla):
-#     pantalla.fill(NEGRO)
-#     ranking = leer_ranking()
-#     fuente_chica = pygame.font.SysFont("Arial", 24)
+def mostrar_ranking(pantalla):
+    fondo_ranking_img = pygame.image.load("imagenes/eternauta8.jpg").convert()
+    fondo_ranking_img = pygame.transform.scale(fondo_ranking_img, (ANCHO_VENTANA, ALTO_VENTANA))
 
-#     texto_titulo = fuente.render("Ranking de Puntajes", True, COLOR_AMARILLO)
-#     pantalla.blit(texto_titulo, (ANCHO_VENTANA // 2 - 150, 50))
+    pantalla.blit(fondo_ranking_img, (0, 0))
 
-#     for i, jugador in enumerate(ranking[:5]):  # Mostramos solo los 5 mejores
-#         texto = fuente_chica.render(f"{i+1}. {jugador['nombre']} - {jugador['puntaje']}", True, COLOR_BLANCO)
-#         pantalla.blit(texto, (ANCHO_VENTANA // 2 - 150, 100 + i * 40))
+    ranking = ordenar_ranking()
+    fuente_chica = pygame.font.SysFont("Courier New", 40)
 
-#     pygame.display.flip()
-#     pygame.time.wait(5000)  # Esperar 5 segundos antes de salir
+    i = 0
+    for jugador in ranking[:5]:
+        texto = fuente_chica.render(f"{i+1}. {jugador['nombre']} - {jugador['puntaje']}", True, BLANCO)
+        pantalla.blit(texto, (ANCHO_VENTANA // 2 - 150, 100 + i * 40))
+        i += 1
+    pygame.display.flip()
+    pygame.time.wait(5000)  
