@@ -35,7 +35,11 @@ botones = [
 corriendo = True # Variable de control del bucle principal del juego.
 
 def dibujar_menu():
-    ventana.fill(BLANCO) # # Pinta el fondo de blanco
+
+    fondo_menu_img = pygame.image.load("imagenes/fondo.eternauta.ranking2.jpg").convert()
+    fondo_menu_img = pygame.transform.scale(fondo_menu_img, (ANCHO_VENTANA, ALTO_VENTANA))
+
+    ventana.blit(fondo_menu_img,(0,0)) # # Pinta el fondo de blanco
     #ventana.blit("imagenes\menu.png", (0, 0))
     for boton in botones:
         pygame.draw.rect(ventana, AZUL, boton["rect"]) # Dibuja un rectángulo azul para cada botón

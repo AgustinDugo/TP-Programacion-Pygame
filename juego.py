@@ -3,6 +3,7 @@ from utils import *
 from configuraciones import *
 from ranking import *
 from imagenes import *
+
 ANCHO_VENTANA = 700
 ALTO_VENTANA = 600
 NEGRO = (0,0,0,)
@@ -132,6 +133,4 @@ def iniciar_juego():
             game_over(pantalla, puntaje)
             
         pygame.display.flip()
-
-
 
