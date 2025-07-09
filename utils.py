@@ -53,7 +53,7 @@ def mover_personaje(teclas, personaje, ancho_pantalla, alto_pantalla):
         personaje["y"] += personaje["vel"]
 
 
-def disparar(teclas, personaje: dict[str, int], disparos: list[dict[str, int]]):
+def disparar(personaje: dict[str, int], disparos: list[dict[str, int]]):
     """
     Agrega un nuevo disparo a la lista si se presiona la barra espaciadora.
 
@@ -62,15 +62,15 @@ def disparar(teclas, personaje: dict[str, int], disparos: list[dict[str, int]]):
         personaje: Diccionario con la posición y tamaño del personaje.
         disparos: Lista de diccionarios representando los disparos activos.
     """
-    if teclas[pygame.K_SPACE]:
-        nuevo_disparo = {
-            "x": personaje["x"] + personaje["ancho"] // 2 - 5,
-            "y": personaje["y"],
-            "ancho": 10,
-            "alto": 20,
-            "vel": 7
-        }
-        disparos.append(nuevo_disparo)
+  
+    nuevo_disparo = {
+        "x": personaje["x"] + personaje["ancho"] // 2 - 5,
+        "y": personaje["y"],
+        "ancho": 10,
+        "alto": 20,
+        "vel": 7
+    }
+    disparos.append(nuevo_disparo)
 
 
 def mover_disparos(disparos: list[dict[str, int]]) -> list[dict[str, int]]:
