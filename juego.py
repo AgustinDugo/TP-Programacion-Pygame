@@ -4,18 +4,7 @@ from configuraciones import *
 from ranking import *
 from imagenes import *
 
-ANCHO_VENTANA = 700
-ALTO_VENTANA = 600
-NEGRO = (0,0,0,)
-ROJO = (250,250,250)
-NEGRO = (0, 0, 0)
-COLOR_BLANCO = (255,255,255)
-COLOR_VERDE = (0,255,0)
-COLOR_ROJO = (255,0,0)
-COLOR_GRIS = (128,128,128)
-COLOR_AMARILLO = (255 ,255,0)
-COLOR_CELESTE = (0,0,128)
-COLOR_AZUL = (0,0,255)
+
 
 
 def game_over(pantalla, puntos):
@@ -70,6 +59,8 @@ def iniciar_juego():
     ALTO = 600
     pantalla = pygame.display.set_mode((ANCHO, ALTO))
     reloj = pygame.time.Clock()
+    velocidad_enemigo = 3
+    marcador_dificultad = 0  # contador para subir la dificultad
 
     #sonido_colision = pygame.mixer.Sound("recursos/colision.wav")
 
@@ -106,7 +97,7 @@ def iniciar_juego():
         teclas = pygame.key.get_pressed()
         mover_personaje(teclas, personaje, ANCHO, ALTO)
         disparos = mover_disparos(disparos)
-        enemigos, contador_spawn = generar_enemigos(enemigos, contador_spawn, ANCHO)
+        enemigos, contador_spawn = generar_enemigos(enemigos, contador_spawn, ANCHO, velocidad_enemigo)
         enemigos = mover_enemigos(enemigos, ALTO)
         disparos, enemigos, puntaje = detectar_colisiones(disparos, enemigos, puntaje)
         enemigos, vidas = detectar_colision_personaje(enemigos, personaje, vidas)
@@ -128,9 +119,16 @@ def iniciar_juego():
         
         reloj.tick(60)
 
-        if vidas <= 0:
+        if verificar_game_over(vidas):
             jugando = False
             game_over(pantalla, puntaje)
+        
+        marcador_dificultad += 1
+        if marcador_dificultad % (60 * 30) == 0:  # cada 30 segundos (60 FPS * 30)
+            if velocidad_enemigo < 15:  # límite para no volverlo injugable
+                velocidad_enemigo += 1
+                print(f"Dificultad aumentada: velocidad enemigos = {velocidad_enemigo}")
+
             
         pygame.display.flip()
 

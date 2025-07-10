@@ -92,7 +92,7 @@ def mover_disparos(disparos: list[dict[str, int]]) -> list[dict[str, int]]:
 
 
 
-def generar_enemigos(enemigos: list[dict[str, int]], contador_spawn: int, ancho_pantalla: int) -> tuple[list[dict[str, int]], int]:
+def generar_enemigos(enemigos: list[dict[str, int]], contador_spawn: int, ancho_pantalla: int, velocidad_enemigo: int) -> tuple[list[dict[str, int]], int]:
     """
     Genera un nuevo enemigo cada 60 cuadros.
 
@@ -110,7 +110,7 @@ def generar_enemigos(enemigos: list[dict[str, int]], contador_spawn: int, ancho_
             "y": -40,
             "ancho": 40,
             "alto": 40,
-            "vel": 3
+            "vel":velocidad_enemigo
         }
         enemigos.append(nuevo_enemigo)
         contador_spawn = 0
