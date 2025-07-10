@@ -3,6 +3,7 @@ from configuraciones import *
 from juego import *
 from imagenes import *
 pygame.init() # inicializar todos los módulos necesarios de PyGame
+pygame.mixer.init() 
 
 ANCHO_VENTANA = 800 # Ancho de la ventana del juego.
 ALTO_VENTANA = 600 # Alto de la ventana del juego. # Crea una ventana de 800 píxeles de ancho y 600 de alto.

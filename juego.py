@@ -22,6 +22,8 @@ def game_over(pantalla, puntos):
 
     fondo_gameover_img = pygame.image.load("imagenes/fondo.eternauta.gameover.jpg").convert()
     fondo_gameover_img = pygame.transform.scale(fondo_gameover_img, (ANCHO_VENTANA, ALTO_VENTANA))
+
+
     
     pantalla.blit(fondo_gameover_img, (0, 0))
     
@@ -79,17 +81,14 @@ def iniciar_juego():
     enemigo_img = pygame.image.load("imagenes/enemigo.eternauta.png").convert_alpha()
     enemigo_img = pygame.transform.scale(enemigo_img, (50, 50))
 
-    enemigo2_img = pygame.image.load("imagenes/enemigo.eternauta2.png").convert_alpha()
-    enemigo2_img = pygame.transform.scale(enemigo_img, (50, 50))
-
     disparo_img = pygame.image.load("imagenes/disparos.eternauta.png").convert_alpha()
     disparo_img = pygame.transform.scale(disparo_img, (20, 30))
 
     fondo_img = pygame.image.load("imagenes/fondo.eternauta.webp").convert()
     fondo_img = pygame.transform.scale(fondo_img, (ANCHO, ALTO))
 
-   
-    
+    sonido = pygame.mixer.Sound("Sonidos/Disparo.eternauta.mp3")
+
     disparos = []
     enemigos = []
     contador_spawn = 0
@@ -103,6 +102,7 @@ def iniciar_juego():
                 jugando = False
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
                 disparar(personaje, disparos)
+                sonido.play()
         teclas = pygame.key.get_pressed()
         mover_personaje(teclas, personaje, ANCHO, ALTO)
         disparos = mover_disparos(disparos)

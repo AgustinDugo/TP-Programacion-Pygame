@@ -135,7 +135,7 @@ def mover_enemigos(enemigos: list, alto_pantalla: int) -> list[dict[str, int]]:
             nuevos_enemigos.append(enemigo)
     return nuevos_enemigos
 
-
+impacto = pygame.mixer.Sound("Sonidos/impacto.eternauta.mp3")
 def detectar_colisiones(disparos: list[dict[str, int]], enemigos: list[dict[str, int]], puntaje: list[dict[str, int]]) -> tuple[list[dict[str, int]], list[dict[str, int]], int]:
     """
     Detecta colisiones entre disparos y enemigos, y actualiza el puntaje.
@@ -150,6 +150,7 @@ def detectar_colisiones(disparos: list[dict[str, int]], enemigos: list[dict[str,
     """
     nuevos_enemigos = []
     nuevos_disparos = []
+    
 
     for enemigo in enemigos:
         colisiono = False
@@ -159,6 +160,7 @@ def detectar_colisiones(disparos: list[dict[str, int]], enemigos: list[dict[str,
             if rect_enemigo.colliderect(rect_disparo):
                 colisiono = True
                 puntaje += 10
+                impacto.play()
                 break
         if not colisiono:
             nuevos_enemigos.append(enemigo)
