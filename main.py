@@ -2,7 +2,6 @@ import pygame # Se importa la librería pygame.
 from configuraciones import *
 from menu import *
 pygame.init() # inicializar todos los módulos necesarios de PyGame
-pygame.mixer.init() 
 
 pygame.display.set_caption("Menú del Juego") # Establece el título de la ventana como "Menú del Juego".
 #imagen = pygame.image.load("TP-Programacion-Pygame\imagenes\image fondo (2).png")

@@ -59,6 +59,8 @@ def menu(corriendo):
                         print("Clic en:", boton["texto"])
                         if boton["texto"] == "Jugar":
                             iniciar_juego()
+                            pygame.mixer.music.load("Sonidos/fondo_menu.mp3")
+                            pygame.mixer.music.play(-1)
                             # Acá podemos llamar a la función de juego
                         elif boton["texto"] == "Ranking":
                             mostrar_ranking(pantalla)
