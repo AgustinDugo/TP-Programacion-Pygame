@@ -1,7 +1,7 @@
 from configuraciones import *
 from ranking import *
 from juego import *
-
+from creditos import *
 
 pygame.init() # inicializar todos los módulos necesarios de PyGame
 
@@ -52,18 +52,17 @@ def menu(corriendo):
 
             if evento.type == pygame.MOUSEBUTTONDOWN: # Si se presiona el mouse
                 pos = pygame.mouse.get_pos() # Obtiene la posición del mouse donde se hizo clic
-                print(pos)
+                
                 for boton in botones:
                     if boton["rect"].collidepoint(pos): # Si el clic fue dentro del rectángulo del botón
                         print("Clic en:", boton["texto"])
                         if boton["texto"] == "Jugar":
-                            print("Iniciando el juego...")
                             iniciar_juego()
                             # Acá podemos llamar a la función de juego
                         elif boton["texto"] == "Ranking":
                             mostrar_ranking(pantalla)
                         elif boton["texto"] == "Créditos":
-                            print("Mostrando los créditos...")
+                            mostrar_creditos()
                             # Acá podemos llamar a la función de créditos
                         elif boton["texto"] == "Salir":
                             corriendo = False

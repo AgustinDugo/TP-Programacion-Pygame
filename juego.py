@@ -4,6 +4,8 @@ from configuraciones import *
 from ranking import *
 from imagenes import *
 
+ANCHO_VENTANA = 700
+ALTO_VENTANA = 600
 
 
 
@@ -62,7 +64,7 @@ def iniciar_juego():
     velocidad_enemigo = 3
     marcador_dificultad = 0  # contador para subir la dificultad
 
-    #sonido_colision = pygame.mixer.Sound("recursos/colision.wav")
+    sonido_colision = pygame.mixer.Sound("sonidos/sonido_colision.mp3")
 
     personaje = {"x": 325, "y": 500, "vel": 5, "ancho": 50, "alto": 50}
 
@@ -100,7 +102,7 @@ def iniciar_juego():
         enemigos, contador_spawn = generar_enemigos(enemigos, contador_spawn, ANCHO, velocidad_enemigo)
         enemigos = mover_enemigos(enemigos, ALTO)
         disparos, enemigos, puntaje = detectar_colisiones(disparos, enemigos, puntaje)
-        enemigos, vidas = detectar_colision_personaje(enemigos, personaje, vidas)
+        enemigos, vidas = detectar_colision_personaje(enemigos, personaje, vidas, sonido_colision)
 
         # pantalla.fill((0, 0, 0))
         pantalla.blit(fondo_img, (0, 0))

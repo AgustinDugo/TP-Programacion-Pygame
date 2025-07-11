@@ -179,7 +179,7 @@ def detectar_colisiones(disparos: list[dict[str, int]], enemigos: list[dict[str,
 
     return nuevos_disparos, nuevos_enemigos, puntaje
 
-def detectar_colision_personaje(enemigos: list[dict[str, int]], personaje: dict[str, int], vidas: int) -> tuple[list[dict[str, int]], int]:
+def detectar_colision_personaje(enemigos: list[dict[str, int]], personaje: dict[str, int], vidas: int, sonido_colision) -> tuple[list[dict[str, int]], int]:
     """
     Detecta si un enemigo colisiona con el personaje.
 
@@ -199,7 +199,7 @@ def detectar_colision_personaje(enemigos: list[dict[str, int]], personaje: dict[
         rect_enemigo = pygame.Rect(enemigo["x"], enemigo["y"], enemigo["ancho"], enemigo["alto"])
         if personaje_rect.colliderect(rect_enemigo):
             vidas -= 1
-            #sonido_colision.play()
+            sonido_colision.play()
         else:
             nuevos_enemigos.append(enemigo)
 
