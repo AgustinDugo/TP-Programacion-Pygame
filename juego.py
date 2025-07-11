@@ -81,17 +81,29 @@ def game_over(pantalla, puntos):
     mostrar_ranking(pantalla) 
 
 def iniciar_juego():
+    """
+    Esta función configura todos los elementos necesarios para comenzar el juego:
+    - Carga de imágenes, sonidos y música.
+    - Inicialización de variables como el personaje, enemigos, disparos, puntaje y vidas.
+    - Manejo de eventos (movimiento, disparos, colisiones).
+    - Renderizado del fondo, personajes y HUD.
+    - Control de dificultad con el tiempo.
+    - Finalización del juego cuando se acaban las vidas, mostrando la pantalla de Game Over.
+    
+    """
 
     ANCHO = 700
     ALTO = 600
     pantalla = pygame.display.set_mode((ANCHO, ALTO))
     reloj = pygame.time.Clock()
+
+    # Velocidad base de enemigos y variable para incrementar dificultad
     velocidad_enemigo = 3
     marcador_dificultad = 0  # contador para subir la dificultad
 
     sonido_colision = pygame.mixer.Sound("sonidos/sonido_colision.mp3")
 
-    personaje = {"x": 325, "y": 500, "vel": 5, "ancho": 50, "alto": 50}
+    personaje = {"x": 325, "y": 500, "vel": 5, "ancho": 50, "alto": 50} # Definición del personaje
 
     personaje_img = pygame.image.load("imagenes/personaje.eternauta.png").convert_alpha()
     personaje_img = pygame.transform.scale(personaje_img, (personaje["ancho"], personaje["alto"]))
@@ -109,6 +121,7 @@ def iniciar_juego():
     pygame.mixer.music.load("Sonidos/musica_fondo.juego.mp3")
     pygame.mixer.music.play(-1)
 
+# Inicialización de juego
     disparos = []
     enemigos = []
     contador_spawn = 0
