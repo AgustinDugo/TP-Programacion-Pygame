@@ -19,7 +19,6 @@ def crear_textos_creditos(fuente):
         "Recursos utilizados:",
         "- Imágenes de El Eternauta adaptadas",
         "- Efectos de sonido de freesound.org / kenney.nl",
-        "- Música libre de Mixkit (si corresponde)",
         "",
         "Gracias por jugar :)",
         "",
