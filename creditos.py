@@ -6,7 +6,7 @@ ALTO_VENTANA = 600
 COLOR_BLANCO = (255, 255, 255)
 COLOR_NEGRO = (0, 0, 0)
 
-def crear_textos_creditos(fuente):
+def crear_textos_creditos():
     return [
         "TRABAJO PRÁCTICO: JUEGO - EL ETERNAUTA",
         "",
