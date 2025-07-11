@@ -21,7 +21,7 @@ ventana = pygame.display.set_mode((ANCHO_VENTANA, ALTO_VENTANA))
 # Definir los botones (x, y, ancho, alto)
 # Se crea una lista de diccionarios, donde cada uno representa un botón con:
 #   -"texto": lo que se va a mostrar.
-#   -"rect": un rectángulo de PyGame que define la posición y el tamaño del botón.
+#   -"rect": un rectángulo de PyGame que define la posición y elj tamaño del botón.
 corriendo = True
 menu(corriendo)
     

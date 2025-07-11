@@ -21,14 +21,25 @@ COLOR_AZUL = (0,0,255)
 
 
 def game_over(pantalla, puntos):
+    """
+    Esta función realiza las siguientes acciones:
+    - Carga y muestra una imagen de fondo para el estado de Game Over.
+    - Muestra mensajes indicando el fin del juego, el puntaje obtenido y solicita al usuario que ingrese su nombre.
+    - Captura la entrada del teclado para que el usuario pueda escribir su nombre (hasta 10 caracteres).
+    - Una vez ingresado el nombre y presionada la tecla ENTER, guarda el puntaje y muestra el ranking.
 
+    Parámetros:
+    - pantalla: superficie de Pygame donde se dibujan los elementos.
+    - puntos: int, cantidad de puntos obtenidos por el jugador.
+    """
     fondo_gameover_img = pygame.image.load("imagenes/fondo.eternauta.gameover.jpg").convert()
     fondo_gameover_img = pygame.transform.scale(fondo_gameover_img, (ANCHO_VENTANA, ALTO_VENTANA))
 
 
     
     pantalla.blit(fondo_gameover_img, (0, 0))
-    
+
+# Renderiza los textos de Game Over, puntaje y solicitud de nombre
     texto1 = fuente.render("GAME OVER", True, ROJO)
     texto2 = fuente.render("Tu puntaje: " + str(puntos), True, COLOR_CELESTE)
     texto3 = fuente.render("Ingresa tu nombre: ", True, COLOR_CELESTE)
@@ -40,6 +51,8 @@ def game_over(pantalla, puntos):
 
     nombre = ""
     esperando = True
+
+    # Bucle que espera la entrada del nombre del jugador
     while esperando:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -47,10 +60,11 @@ def game_over(pantalla, puntos):
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN and nombre != "":
-                    esperando = False
+                    esperando = False   # Finaliza si se presiona Enter con un nombre ingresado
                 elif evento.key == pygame.K_BACKSPACE:
-                    nombre = nombre[:-1]
+                    nombre = nombre[:-1]    # Borra el último carácter
                 else:
+                    # Solo agrega caracteres imprimibles hasta un máximo de 10
                     if len(nombre) < 10 and evento.unicode.isprintable():
                         nombre += evento.unicode
 

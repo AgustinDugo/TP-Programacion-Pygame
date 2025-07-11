@@ -10,8 +10,6 @@ pygame.init() # inicializar todos los módulos necesarios de PyGame
 ANCHO_VENTANA = 800 # Ancho de la ventana del juego.
 ALTO_VENTANA = 600 # Alto de la ventana del juego. # Crea una ventana de 800 píxeles de ancho y 600 de alto.
 pygame.display.set_caption("Menú del Juego") # Establece el título de la ventana como "Menú del Juego".
-#imagen = pygame.image.load("TP-Programacion-Pygame\imagenes\image fondo (2).png")
-#imagen = pygame.transform.scale(imagen,(ANCHO_VENTANA,ALTO_VENTANA))
 # Colores
 # Se definen algunos colores comunes usando tuplas RGB para usarlos más adelante en los botones y el fondo.
 BLANCO = (255, 255, 255)

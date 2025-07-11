@@ -254,5 +254,33 @@
     {
         "nombre": "asdasd",
         "puntaje": 0
+    },
+    {
+        "nombre": "Mateo",
+        "puntaje": 60
+    },
+    {
+        "nombre": "  Mateo ",
+        "puntaje": 40
+    },
+    {
+        "nombre": " Mateo ",
+        "puntaje": 0
+    },
+    {
+        "nombre": " Joaco ",
+        "puntaje": 80
+    },
+    {
+        "nombre": " Joaco ",
+        "puntaje": 190
+    },
+    {
+        "nombre": "Mateo ",
+        "puntaje": 160
+    },
+    {
+        "nombre": " Mateo ",
+        "puntaje": 390
     }
 ]
