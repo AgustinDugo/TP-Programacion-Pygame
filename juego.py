@@ -4,7 +4,18 @@ from configuraciones import *
 from ranking import *
 from imagenes import *
 
-
+ANCHO_VENTANA = 700
+ALTO_VENTANA = 600
+NEGRO = (0,0,0,)
+ROJO = (250,250,250)
+NEGRO = (0, 0, 0)
+COLOR_BLANCO = (255,255,255)
+COLOR_VERDE = (0,255,0)
+COLOR_ROJO = (255,0,0)
+COLOR_GRIS = (128,128,128)
+COLOR_AMARILLO = (255 ,255,0)
+COLOR_CELESTE = (0,0,128)
+COLOR_AZUL = (0,0,255)
 
 
 def game_over(pantalla, puntos):
@@ -79,6 +90,8 @@ def iniciar_juego():
     fondo_img = pygame.transform.scale(fondo_img, (ANCHO, ALTO))
 
     sonido = pygame.mixer.Sound("Sonidos/Disparo.eternauta.mp3")
+    pygame.mixer.music.load("Sonidos/musica_fondo.juego.mp3")
+    pygame.mixer.music.play(-1)
 
     disparos = []
     enemigos = []
@@ -91,6 +104,7 @@ def iniciar_juego():
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 jugando = False
+                pygame.mixer.music.stop()
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
                 disparar(personaje, disparos)
                 sonido.play()
@@ -121,6 +135,7 @@ def iniciar_juego():
 
         if verificar_game_over(vidas):
             jugando = False
+            pygame.mixer.music.stop()
             game_over(pantalla, puntaje)
         
         marcador_dificultad += 1
@@ -131,4 +146,3 @@ def iniciar_juego():
 
             
         pygame.display.flip()
-

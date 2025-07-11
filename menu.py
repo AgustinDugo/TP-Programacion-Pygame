@@ -42,14 +42,15 @@ def dibujar_menu():
     pygame.display.update()
 
 def menu(corriendo):
-
+    pygame.mixer.music.load("Sonidos/fondo_menu.mp3")
+    pygame.mixer.music.play(-1)
     while corriendo:
         dibujar_menu() # Llama a la función para dibujar el menú del juego
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 corriendo = False # Si el usuario cierra la ventana, se termina el bucle.
-
+                pygame.mixer.music.stop()
             if evento.type == pygame.MOUSEBUTTONDOWN: # Si se presiona el mouse
                 pos = pygame.mouse.get_pos() # Obtiene la posición del mouse donde se hizo clic
                 print(pos)
@@ -67,6 +68,6 @@ def menu(corriendo):
                             # Acá podemos llamar a la función de créditos
                         elif boton["texto"] == "Salir":
                             corriendo = False
-                
+                            pygame.mixer.music.stop()
 
     pygame.quit() # Se cierra correctamente PyGame liberando l
