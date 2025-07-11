@@ -19,13 +19,6 @@ Shooter 2D con scroll vertical e infinito. El jugador dispara a enemigos que cae
 
 ---
 
-## 📸 Capturas
-
-<img src="assets/captura1.png" width="400"/>
-<img src="assets/captura2.png" width="400"/>
-
----
-
 ## ⚙️ Requisitos
 
 - Python 3.10+
